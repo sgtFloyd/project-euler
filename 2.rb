@@ -12,3 +12,8 @@ def fib(limit, i, j)
 end
 
 puts fib(4_000_000, 0, 1).inject(0){|sum, i| sum += (i%2==0 ? i : 0)}
+
+# => 4613732
+# real    0m0.007s
+# user    0m0.004s
+# sys     0m0.002s

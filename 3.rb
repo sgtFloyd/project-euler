@@ -26,6 +26,11 @@ def sieve(n)
 end
 
 num = 600851475143
-sieve( Math.sqrt(num).to_i ).each do |prime|
-  puts prime if num%prime==0
+sieve( Math.sqrt(num).to_i ).reverse.each do |prime|
+  (puts prime; break) if num%prime==0
 end
+
+# => 6857
+# real    0m0.417s
+# user    0m0.405s
+# sys     0m0.010s
