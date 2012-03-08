@@ -6,9 +6,9 @@
 # By considering the terms in the Fibonacci sequence whose values do not
 # exceed four million, find the sum of the even-valued terms.
 
-def fib(limit, i, j)
+def fib(limit, i=0, j=1)
   return [] if (i>limit)          # base case
   return [i] + fib(limit, j, i+j) # recursive case
 end
 
-puts fib(4_000_000, 0, 1).inject(0){|sum, i| sum += (i%2==0 ? i : 0)}
+puts fib(4_000_000).inject(0){|sum, i| sum += (i%2==0 ? i : 0)}
