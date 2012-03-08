@@ -11,7 +11,7 @@ def fib(limit, i, j)
   return [i] + fib(limit, j, i+j) # recursive case
 end
 
-puts fib(4_000_000, 0, 1).inject(0){|sum, i| sum += (i%2==0 ? i : 0)}
+puts fib(4_000_000, 0, 1).inject(0){|sum, i| sum + (i%2==0 ? i : 0)}
 
 # => 4613732
 # real    0m0.007s

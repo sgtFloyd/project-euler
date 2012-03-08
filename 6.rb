@@ -11,11 +11,11 @@
 # one hundred natural numbers and the square of the sum.
 
 def sum_of_sq(range)
-  range.inject(0){|sum, i| sum += i**2}
+  range.inject(0){|sum, i| sum + i**2}
 end
 
 def sq_of_sum(range)
-  range.inject(0){|sum, i| sum += i} ** 2
+  range.inject(0){|sum, i| sum + i} ** 2
 end
 
 puts sq_of_sum(1..100) - sum_of_sq(1..100)

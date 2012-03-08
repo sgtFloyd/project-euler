@@ -44,7 +44,7 @@ NUM = [ "73167176531330624919225119674426574742355349194934",
 
 max = -1
 NUM.scan(/(?=(\d{5}))/).each do |match|
-  product = match[0].split('').inject(1){|prod, n| prod *= n.to_i}
+  product = match[0].split('').inject(1){|prod, n| prod * n.to_i}
   max = product if product > max
 end
 puts max
