@@ -13,7 +13,7 @@ def sieve(n)
   a.map.with_index{|t, i| i if t}.compact
 end
 
-puts sieve(2_000_000).inject(0){|sum, i| sum + i}
+puts sieve(2_000_000).inject(:+)
 
 # => 142913828922
 # real    0m1.198s

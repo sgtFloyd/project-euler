@@ -15,7 +15,7 @@ def sum_of_sq(range)
 end
 
 def sq_of_sum(range)
-  range.inject(0){|sum, i| sum + i} ** 2
+  range.inject(:+) ** 2
 end
 
 puts sq_of_sum(1..100) - sum_of_sq(1..100)

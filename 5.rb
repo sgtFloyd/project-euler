@@ -9,7 +9,7 @@ def divis?(num)
   return true
 end
 
-val = [*RANGE].inject(1){|sum, i| sum * i}
+val = [*RANGE].inject(:*)
 RANGE.each do |divisor|
   val /= divisor while divis?(val/divisor)
 end
