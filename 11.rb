@@ -26,6 +26,8 @@
 # What is the greatest product of four adjacent numbers in any direction
 # (up, down, left, right, or diagonally) in the 20x20 grid?
 
+GROUP_SIZE = 4
+
 GRID = [[ 8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8],
         [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0],
         [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30,  3, 49, 13, 36, 65],
@@ -47,9 +49,8 @@ GRID = [[ 8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77,
         [20, 73, 35, 29, 78, 31, 90,  1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57,  5, 54],
         [ 1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48]]
 
-GROUP_SIZE = 4
-
 max = 0
+
 # check horizontal groups
 (0...GRID.size).each do |y|
   (0..GRID.size-GROUP_SIZE).each do |x|
@@ -59,7 +60,27 @@ max = 0
 end
 
 # check vertical groups
-# check diagonal-up groups
-# check diagonal-down groups
+(0..GRID.size-GROUP_SIZE).each do |y|
+  (0...GRID.size).each do |x|
+    prod = GRID[y][x] * GRID[y+1][x] * GRID[y+2][x] * GRID[y+3][x]
+    max = prod if prod > max
+  end
+end
+
+# check down-right diagonal groups
+(0..GRID.size-GROUP_SIZE).each do |y|
+  (0..GRID.size-GROUP_SIZE).each do |x|
+    prod = GRID[y][x] * GRID[y+1][x+1] * GRID[y+2][x+2] * GRID[y+3][x+3]
+    max = prod if prod > max
+  end
+end
+
+# check down-left diagonal groups
+(GROUP_SIZE-1...GRID.size).each do |y|
+  (0..GRID.size-GROUP_SIZE).each do |x|
+    prod = GRID[y][x] * GRID[y-1][x+1] * GRID[y-2][x+2] * GRID[y-3][x+3]
+    max = prod if prod > max
+  end
+end
 
 puts max
