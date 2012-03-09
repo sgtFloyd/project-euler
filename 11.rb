@@ -84,3 +84,8 @@ end
 end
 
 puts max
+
+# => 70600674
+# real    0m0.008s
+# user    0m0.005s
+# sys     0m0.002s
