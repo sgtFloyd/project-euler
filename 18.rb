@@ -47,12 +47,12 @@ def triangle(term)
   return $t_memo[term] ||= (term + triangle(term-1))
 end
 
-def row(x) # get row at height x (0-indexed)
-  DATA[triangle(x)..triangle(x)+x]
+def cell(x, y) # get cell at row x, position y (0-indexed)
+  DATA[triangle(x)+y]
 end
 
-def cell(x, y) # get cell at row x, position y (0-indexed)
-  row(x)[y]
+def set_cell(x, y, val)
+  DATA[triangle(x)+y] = val
 end
 
 # "fold" triangle up, keeping track of running max for higher cell
