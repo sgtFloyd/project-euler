@@ -52,16 +52,13 @@ def cell(x, y) # get cell at row x, position y (0-indexed)
 end
 
 def max_neighbor(x, y)
-  n1 = cell(x+1, y)
-  n2 = cell(x+1, y+1)
-  n1 > n2 ? n1 : n2
+  [cell(x+1, y), cell(x+1, y+1)].max
 end
 
 # fold triangle up, keeping track of max path to base for each cell
 (HEIGHT-1).step(0,-1).each do |row|
   (0..row).each do |col|
-    max_path = cell(row, col) + max_neighbor(row, col)
-    DATA[triangle(row)+col] = max_path
+    DATA[triangle(row)+col] += max_neighbor(row, col)
   end
 end
 
