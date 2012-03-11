@@ -18,10 +18,8 @@
 #
 # What is the value of the first triangle number to have over five hundred divisors?
 
-$t_memo = [0] # memoized triangle numbers
 def triangle(term)
-  return $t_memo[term] if $t_memo[term]
-  return $t_memo[term] ||= (term + triangle(term-1))
+  term * (term+1) / 2
 end
 
 def count_factors(num)
