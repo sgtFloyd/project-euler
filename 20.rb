@@ -11,3 +11,8 @@ def factorial(n)
 end
 
 puts factorial(100).to_s.split('').inject(0){|sum, n| sum + n.to_i}
+
+# => 648
+# real    0m0.008s
+# user    0m0.005s
+# sys     0m0.002s

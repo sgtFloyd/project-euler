@@ -44,3 +44,8 @@ end
 end
 
 puts DATA[0]
+
+# => 7273
+# real    0m0.013s
+# user    0m0.010s
+# sys     0m0.002s

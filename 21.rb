@@ -21,3 +21,8 @@ pairs = [false] * MAX
 end
 
 puts pairs.map.with_index{|t, i| i if t}.compact.inject(:+)
+
+# => 31626
+# real    0m6.166s
+# user    0m6.161s
+# sys     0m0.009s
