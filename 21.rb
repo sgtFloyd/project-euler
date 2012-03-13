@@ -8,8 +8,28 @@
 
 MAX = 10_000
 
-def d(n)
-  (1..n/2.0).select{|f| n%f==0}.inject(:+)
+def d(n) # sum of n's proper divisors
+  divisors(n).inject(:+)
+end
+
+def divisors(n) # n's proper divisors
+  pf = prime_factor(n)
+  (1...pf.size).inject([]) do |f, size|
+    f + pf.combination(size).map{|combo| combo.inject(:*)}
+  end.uniq + [1]
+end
+
+def prime_factor(n)
+  factors = []
+  (2..Math.sqrt(n)).each do |p|
+    break if n == 1
+    while n%p == 0
+      n /= p
+      factors << p
+    end
+  end
+  factors << n unless n == 1
+  factors
 end
 
 pairs = [false] * MAX
@@ -23,6 +43,6 @@ end
 puts pairs.map.with_index{|t, i| i if t}.compact.inject(:+)
 
 # => 31626
-# real    0m6.166s
-# user    0m6.161s
-# sys     0m0.009s
+# real    0m0.560s
+# user    0m0.556s
+# sys     0m0.003s
