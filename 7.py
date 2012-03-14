@@ -3,37 +3,29 @@
 # we can see that the 6th prime is 13.
 #
 # What is the 10,001st prime number?
+import math
 
 TARGET = 10001
 
-# Sieve of Eratosthenes
-#    Input: an integer n > 1
-#
-#    Let A be an array of Boolean values, indexed by integers 2 to n,
-#    initially all set to true.
-#
-#    for i = 2, 3, 4, ..., while i <= n/2:
-#      if A[i] is true:
-#        for j = 2i, 3i, 4i, ..., while j <= n:
-#          A[j] := false
-#
-#    Now all i such that A[i] is true are prime.
+# memo-ized sieve of eratosthenes
+primes = [False, False, True] # initial values
 def sieve(n):
-  a = [True]*(n+1)
-  a[0] = a[1] = False
-  for i in xrange(n/2+1):
-    if a[i]:
-      for j in xrange(2*i, n+1, i):
-        a[j] = False
-  return [i for i, prime in enumerate(a) if prime]
+  global primes; lower = len(primes)
+  if n+1 > lower: # extend storage, even indexes non-prime
+    primes += [True, False] * ((n-lower)/2+1)
+  for i in xrange(3, int(math.sqrt(n)+1), 2):
+    if primes[i]:
+      for j in [x for x in xrange(2*i, n+1, i) if x>=lower]:
+        primes[j] = False
+  return [i for i, is_prime in enumerate(primes) if is_prime]
 
-n = TARGET; primes = sieve(n)
-while len(primes) < TARGET:
-  n *= 2; primes = sieve(n)
+n = TARGET; pnums = sieve(n)
+while len(pnums) < TARGET:
+  n *= 2; pnums = sieve(n)
 
-print primes[TARGET-1]
+print pnums[TARGET-1]
 
 # => 104743
-# real    0m0.109s
-# user    0m0.100s
+# real    0m0.080s
+# user    0m0.071s
 # sys     0m0.007s
