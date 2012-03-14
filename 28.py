@@ -12,12 +12,16 @@
 
 SIZE = 1001
 print sum(
-  map(lambda i: i**2, range(3, SIZE+1, 2))         +  # upper-right diagonal
-  map(lambda i: i**2 + 1, range(2, SIZE+1, 2))     +  # bottom-left diagonal
-  map(lambda i: i**2 + (i+1), range(2, SIZE+1, 2)) +  # upper-left diagonal
-  map(lambda i: i**2 - (i-1), range(2, SIZE+1, 2)) +  # bottom-right diagonal
-  [1]                                                 # center 1
-)
+        reduce(
+          list.__add__,
+          [ [ (i+1)**2,       # upper-right diagonal
+              i**2 + 1,       # bottom-left diagonal
+              i**2 + (i+1),   # upper-left diagonal
+              i**2 - (i-1) ]  # bottom-right diagonal
+            for i in range(2, SIZE+1, 2)
+          ] + [[1]]           # center 1
+        )
+      )
 
 # => 669171001
 #
