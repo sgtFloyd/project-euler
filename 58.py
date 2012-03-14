@@ -18,6 +18,20 @@
 # side length of the square spiral for which the ratio of primes along both
 # diagonals first falls below 10%?
 
+import math
+
+a = [False, False, True] # initial values
+def sieve(n):
+  global a; lower = len(a)
+  if n+1 > lower:
+    a += [True, False] * int(math.ceil((n+1-lower+1)/2))
+  for i in xrange(3, int(math.sqrt(n)+1), 2):
+    if a[i]:
+      # TODO: filter upon range construction, instead
+      for j in filter(lambda x: x>=lower, xrange(2*i, n+1, i)):
+        a[j] = False
+  return [i for i, prime in enumerate(a) if prime]
+
 def diagonals(size):
   return reduce(
           list.__add__,
@@ -29,4 +43,14 @@ def diagonals(size):
           ] + [[1]]           # center 1
         )
 
-print diagonals(7)
+print "100: %s" % sieve(100)
+print "101: %s" % sieve(101)
+print "102: %s" % sieve(102)
+#print "103: %s" % sieve(103)
+#print "105: %s" % sieve(105)
+#print "106: %s" % sieve(106)
+#print "108: %s" % sieve(108)
+#print "201: %s" % sieve(201)
+#print "203: %s" % sieve(203)
+#print "209: %s" % sieve(209)
+print "210: %s" % sieve(210)
