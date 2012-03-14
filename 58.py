@@ -20,16 +20,17 @@
 
 import math
 
-a = [False, False, True] # initial values
+# memo-ized sieve of eratosthenes
+primes = [False, False, True] # initial values
 def sieve(n):
-  global a; lower = len(a)
-  if n+1 > lower:
-    a += [True, False] * ((n-lower)/2+1)
+  global primes; lower = len(primes)
+  if n+1 > lower: # extend storage, even indexes non-prime
+    primes += [True, False] * ((n-lower)/2+1)
   for i in xrange(3, int(math.sqrt(n)+1), 2):
-    if a[i]:
+    if primes[i]:
       for j in [x for x in xrange(2*i, n+1, i) if x>=lower]:
-        a[j] = False
-  return [i for i, prime in enumerate(a) if prime]
+        primes[j] = False
+  # return [i for i, is_prime in enumerate(primes) if is_prime]
 
 def diagonals(size):
   return reduce(
@@ -38,6 +39,17 @@ def diagonals(size):
               i**2 + 1,       # upper-left diagonal
               i**2 + (i+1),   # bottom-left diagonal
               i**2 - (i-1) ]  # upper-right diagonal
-            for i in range(2, size+1, 2)
-          ] + [[1]]           # center 1
-        )
+            for i in xrange(2, size+1, 2)
+          ] + [[1]] )         # center 1
+
+# TODO: uses Miller-Rabin primality test for number greater than 999984
+def is_prime(n):
+  if n < 999985: return primes[n] # use cache
+  if (n % 2 == 0) or (n % 3 == 0): return False
+
+def prime_percent(spiral_size):
+  return sum([is_prime(d)
+                for d in diagonals(spiral_size)
+            ]) / float(2*spiral_size-1)
+
+sieve(999983) # cache prime numbers 0 - 999,983
