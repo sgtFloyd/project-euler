@@ -7,17 +7,17 @@ import math
 
 TARGET = 10001
 
-# memo-ized sieve of eratosthenes
 primes = [False, False, True] # initial values
 def sieve(n):
+  """ memoized, optimized sieve of eratosthenes """
   global primes; lower = len(primes)
   if n+1 > lower:
-    # extend storage, even #s are automatically non-prime
     primes += [True, False] * ((n-lower)/2+1)
   for i in xrange(3, int(math.sqrt(n)+1), 2):
     if primes[i]:
-      for j in [x for x in xrange(3*i, n+1, 2*i) if x>=lower]:
-        primes[j] = False
+      for j in xrange(3*i, n+1, 2*i):
+        if j >= lower:
+          primes[j] = False
   return [i for i, is_prime in enumerate(primes) if is_prime]
 
 n = TARGET; pnums = sieve(n)
@@ -27,6 +27,6 @@ while len(pnums) < TARGET:
 print pnums[TARGET-1]
 
 # => 104743
-# real    0m0.080s
-# user    0m0.071s
+# real    0m0.056s
+# user    0m0.048s
 # sys     0m0.007s
