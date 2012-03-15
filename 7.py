@@ -11,11 +11,12 @@ TARGET = 10001
 primes = [False, False, True] # initial values
 def sieve(n):
   global primes; lower = len(primes)
-  if n+1 > lower: # extend storage, even indexes non-prime
+  if n+1 > lower:
+    # extend storage, even #s are automatically non-prime
     primes += [True, False] * ((n-lower)/2+1)
   for i in xrange(3, int(math.sqrt(n)+1), 2):
     if primes[i]:
-      for j in [x for x in xrange(2*i, n+1, i) if x>=lower]:
+      for j in [x for x in xrange(3*i, n+1, 2*i) if x>=lower]:
         primes[j] = False
   return [i for i, is_prime in enumerate(primes) if is_prime]
 
