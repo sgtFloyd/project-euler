@@ -18,37 +18,11 @@
 # side length of the square spiral for which the ratio of primes along both
 # diagonals first falls below 10%?
 
-import math
-primes = [False, False, True] # initial values
-def sieve(n): # memoized, optimized sieve of eratosthenes
-  global primes; lower = len(primes)
-  if n+1 > lower:
-    # extend storage, even #s are automatically non-prime
-    primes += [True, False] * ((n-lower)/2+1)
-  for i in xrange(3, int(math.sqrt(n)+1), 2):
-    if primes[i]:
-      for j in [x for x in xrange(3*i, n+1, 2*i) if x>=lower]:
-        primes[j] = False
-  # return [i for i, is_prime in enumerate(primes) if is_prime]
-
-def diagonals(size):
-  return reduce(
-          list.__add__,
-          [ [ #(i+1)**2,      # bottom-right diagonal - never prime!
-              i**2 + 1,       # upper-left diagonal
-              i**2 + (i+1),   # bottom-left diagonal
-              i**2 - (i-1) ]  # upper-right diagonal
-            for i in xrange(2, size+1, 2)
-          ] #+ [[1]]          # center 1 - never prime!
-        )
+import random
 
 def is_prime(n):
-  if n < 999985: return primes[n] # use cache
   if n%2 == 0 or n%3 == 0 or n%5 == 0 or n%7 == 0: return False
   return miller_rabin(n)
-
-
-import random
 
 def miller_rabin(n):
   # compute s and d
@@ -78,14 +52,17 @@ def a_vals(n):
   if n < 341550071728321: return [2, 3, 5, 7, 11, 13, 17] # n < 341,550,071,728,321
   return [random.randint(1,n-1) for _ in xrange(0,20)]
 
-def prime_percent(spiral_size):
-  return sum([is_prime(d)
-                for d in diagonals(spiral_size)
-            ]) / (2*spiral_size-1.0) # ensure float
+spiral_size = 7; prime_count = 8.0; total_count = 13.0; prime_percent = 8.0/13.0
+while prime_percent > 0.1:
+  spiral_size += 2
+  total_count += 4
+  for d in [spiral_size**2 - (i*spiral_size-i) for i in range(1,4)]:
+    if is_prime(d): prime_count += 1
+  prime_percent = prime_count/total_count
 
-sieve(999983) # cache prime numbers 0 - 999,983
-i=26501
-while True:
-  i += 2
-  pp = prime_percent(i)
-  print "%s: %s" % (str(i), str(pp))
+print spiral_size
+
+# => 26241
+# real    0m0.151s
+# user    0m0.143s
+# sys     0m0.007s
