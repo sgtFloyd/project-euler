@@ -47,3 +47,25 @@ def is_hexagonal(x)
   solution = solve_quad(2, -1, -x)
   solution.max % 1 == 0
 end
+
+# prime factorization
+def prime_factor(num)
+  pf = []
+  (2..Math.sqrt(num).to_i).each do |p|
+    break if num == 1
+    while num%p == 0
+      num /= p
+      pf << p
+    end
+  end
+  pf << num unless num == 1
+  pf
+end
+
+# list of factors
+def factor(num)
+  pf = prime_factor(num)
+  (1..pf.length).inject([]) do |factors, s|
+    factors + pf.combination(s).map{|c| c.inject(:*)}
+  end.uniq
+end
