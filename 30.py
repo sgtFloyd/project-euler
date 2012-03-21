@@ -12,3 +12,8 @@
 # the sum of fifth powers of their digits.
 
 print sum([n for n in range(2, 200000) if sum([int(c)**5 for c in str(n)]) == n])
+
+# => 443839
+# real    0m1.104s
+# user    0m1.092s
+# sys     0m0.011s

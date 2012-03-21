@@ -15,3 +15,8 @@ puts (2..200_000).inject(0){|total_sum, n|
         sum = n.to_s.split('').inject(0){|sum, i| sum += i.to_i**5}
         total_sum + (sum == n ? n : 0)
     }
+
+# => 443839
+# real    0m1.241s
+# user    0m1.234s
+# sys     0m0.007s
