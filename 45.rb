@@ -7,30 +7,30 @@
 #
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-import math
+def hexagonal(n)
+  n*(2*n-1)
+end
 
-def hexagonal(n):
-  return n*(2*n-1)
-
-def is_pentagonal(x):
-  """ x = n(3n-1)/2 => 0 = 3n^2 - n - 2x """
+# x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
+def is_pentagonal(x)
   solution = solve_quad(3, -1, -2*x)
-  return max(solution) % 1 == 0
+  solution.max % 1 == 0
+end
 
-def solve_quad(a, b, c):
-  """ solve for n: 0 = an^2 + bn + c """
-  sqrt = math.sqrt(b**2 - 4*a*c)
-  return ((-b + sqrt)/(2*a),
-          (-b - sqrt)/(2*a))
+# solve for n: 0 = an^2 + bn + c
+def solve_quad(a, b, c)
+  sqrt = Math.sqrt(b**2 - 4*a*c)
+  return [(-b + sqrt)/(2*a),
+          (-b - sqrt)/(2*a)]
+end
 
 # all hexagonal numbers are also triangular
 n = 144; hn = hexagonal(n)
-while not is_pentagonal(hn):
-  n += 1; hn = hexagonal(n)
+(n += 1; hn = hexagonal(n)) while !is_pentagonal(hn)
 
-print hn
+puts hn
 
 # => 1533776805
-# real    0m0.066s
-# user    0m0.059s
-# sys     0m0.006s
+# real    0m0.056s
+# user    0m0.053s
+# sys     0m0.003s
