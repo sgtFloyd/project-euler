@@ -1,4 +1,4 @@
-import math
+import math, random
 
 primes = [False, False, True] # initial values
 def sieve(n):
@@ -14,7 +14,6 @@ def sieve(n):
   return [i for i, is_prime in enumerate(primes) if is_prime]
 
 
-import random
 
 def miller_rabin(n):
   """ miller-rabin primality test """
@@ -44,3 +43,24 @@ def potential_witnesses(n):
   if n < 3474749660383:   return [2, 3, 5, 7, 11, 13]     # n < 3,474,749,660,383
   if n < 341550071728321: return [2, 3, 5, 7, 11, 13, 17] # n < 341,550,071,728,321
   return [random.randint(1,n-1) for _ in xrange(0,20)]    # 99.999999999909051% (1 - .25**20) accuracy for n >= 341,550,071,728,321
+
+def solve_quad(a, b, c):
+  """ solve for n: 0 = an^2 + bn + c """
+  sqrt = math.sqrt(b**2 - 4*a*c)
+  return ((-b + sqrt)/(2*a),
+          (-b - sqrt)/(2*a))
+
+def is_triangle(x):
+  """ x = n(n+1)/2 => 0 = n^2 + n - 2x """
+  solution = solve_quad(1, 1, -2*x)
+  return max(solution) % 1 == 0
+
+def is_pentagonal(x):
+  """ x = n(3n-1)/2 => 0 = 3n^2 - n - 2x """
+  solution = solve_quad(3, -1, -2*x)
+  return max(solution) % 1 == 0
+
+def is_hexagonal(x):
+  """ x = n(2n-1) => 0 = 2n^2 - n - x """
+  solution = solve_quad(2, -1, -x)
+  return max(solution) % 1 == 0
