@@ -9,9 +9,9 @@ def fact(n)
   $factorial[n] ||= n*fact(n-1)
 end
 
-puts (10..50_000).inject(0){|total_sum, i|
-  total_sum + (i.to_s.split('').inject(0){|sum, n| sum + fact(n.to_i)} == i ? i : 0)
-}
+puts (10..50_000).select{|i|
+  i.to_s.split('').inject(0){|sum, n| sum + fact(n.to_i)} == i
+}.inject(:+)
 
 # => 40730
 # real    0m0.267s

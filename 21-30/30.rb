@@ -11,10 +11,9 @@
 # Find the sum of all the numbers that can be written as
 # the sum of fifth powers of their digits.
 
-puts (2..200_000).inject(0){|total_sum, n|
-        sum = n.to_s.split('').inject(0){|sum, i| sum += i.to_i**5}
-        total_sum + (sum == n ? n : 0)
-    }
+puts (2..200_000).select{|n|
+        n.to_s.split('').map{|i| i.to_i**5}.inject(:+) == n
+    }.inject(:+)
 
 # => 443839
 # real    0m1.241s

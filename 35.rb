@@ -27,12 +27,7 @@ def circular?(arr)
   true
 end
 
-circular = []
-sieve(1_000_000).each do |prime|
-  circular << prime if circular?(prime.to_s.split(''))
-end
-
-puts circular.count
+puts sieve(1_000_000).select{|prime| circular?(prime.to_s.split(''))}.count
 
 # => 55
 # real    0m2.118s

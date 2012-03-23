@@ -19,8 +19,6 @@ def pal?(str)
   return pal?(str[1..-2])
 end
 
-puts (1...1_000_000).inject(0) do |sum, n|
-  sum + (pal?(n) && pal?(n.base(2)) ? n : 0)
-end
+puts (1...1_000_000).select{|n| pal?(n) && pal?(n.base(2))}.inject(:+)
 
 # => 872187
