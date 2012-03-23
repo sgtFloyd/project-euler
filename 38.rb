@@ -21,7 +21,7 @@ def pandigital?(a)
 end
 
 max = -1
-(2..9999).each do |i|
+(1000..9999).each do |i|
   n = 1; products = [*1..n].map{|m| m*i}
   while products.join.size < 9
     n += 1; products = [*1..n].map{|m| m*i}
