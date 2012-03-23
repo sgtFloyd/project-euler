@@ -3,9 +3,7 @@
 # 
 # How many routes are there through a 20x20 grid?
 
-def factorial(n)
-  [*1..n].inject(:*)
-end
+require_relative '../euler.rb'; include Euler
 
 # (2n choose n) => 2n! / (n! * n!)
 def count_paths(grid_size)

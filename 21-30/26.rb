@@ -17,18 +17,7 @@
 # Find the value of d < 1000 for which 1/d contains the longest recurring
 # cycle in its decimal fraction part.
 
-$primes = [false, false, true] # initial values
-def sieve(n)
-  # memoized, optimized sieve of eratosthenes
-  lower = $primes.length
-  $primes += [true, false] * ((n-lower)/2+1) if n+1 > lower
-  (3..Math.sqrt(n)).each do |i|
-    (3*i..n).step(2*i).each do |j|
-      $primes[j] = false
-    end if $primes[i]
-  end
-  $primes.map.with_index{|t, i| i if t}.compact
-end
+require_relative '../euler.rb'; include Euler
 
 # Fermat's Little Theorem says:
 #

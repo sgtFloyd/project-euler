@@ -6,9 +6,7 @@
 #
 # Find the sum of the digits in the number 100!
 
-def factorial(n)
-  [*1..n].inject(:*)
-end
+require_relative '../euler.rb'; include Euler
 
 puts factorial(100).to_s.split('').inject(0){|sum, n| sum + n.to_i}
 

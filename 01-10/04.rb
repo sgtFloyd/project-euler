@@ -4,11 +4,8 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
 # return true if string is palindrome
-def pal?(str)
-  return false if str[0] != str[-1]
-  return true if str.length < 2
-  return pal?(str[1..-2])
-end
+
+require_relative '../euler.rb'; include Euler
 
 # return the greatest 3-digit divisor of num
 def gd(num)
@@ -20,7 +17,7 @@ def gd(num)
 end
 
 (999*999).downto(100*100).each{|i|
-  next unless pal?(i.to_s)
+  next unless palindrome?(i.to_s)
   (puts i; break) if gd(i)
 }
 

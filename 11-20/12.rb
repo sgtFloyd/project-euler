@@ -18,26 +18,11 @@
 #
 # What is the value of the first triangle number to have over five hundred divisors?
 
-def triangle(term)
-  term * (term+1) / 2
-end
+require_relative '../euler.rb'; include Euler
 
 def count_factors(num)
-  factors = prime_factor(num)
+  factors = sum(prime_factors(num))
   factors.values.inject(1){|prod, v| prod * (v+1)}
-end
-
-def prime_factor(num)
-  factors = []
-  (2..Math.sqrt(num).to_i).each do |p|
-    break if num == 1
-    while num%p == 0
-      num /= p
-      factors << p
-    end
-  end
-  factors << num unless num == 1
-  sum(factors)
 end
 
 def sum(factors)

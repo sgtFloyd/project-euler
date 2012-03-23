@@ -24,20 +24,9 @@
 # quadratic expression that produces the maximum number of
 # primes for consecutive values of n, starting with n = 0.
 
-$primes = [false, false, true] # initial values
-# memoized, optimized sieve of eratosthenes
-def sieve(n)
-  lower = $primes.length
-  $primes += [true, false] * ((n-lower)/2+1) if n+1 > lower
-  (3..Math.sqrt(n)).each do |i|
-    (3*i..n).step(2*i).each do |j|
-      $primes[j] = false
-    end if $primes[i]
-  end
-  # $primes.map.with_index{|t, i| i if t}.compact
-end
+require_relative '../euler.rb'; include Euler
 
-def solve_quad(n, a, b)
+def eval_quad(n, a, b)
   n**2 + a*n + b
 end
 
@@ -51,7 +40,7 @@ max_n = 0; max_pair = [0,0]
 (-1000..1000).each do |a|
   (-1000..1000).each do |b|
     n = 0
-    n += 1 while is_prime? solve_quad(n, a, b)
+    n += 1 while is_prime? eval_quad(n, a, b)
     (max_n = n; max_pair = [a,b]) if n > max_n
   end
 end

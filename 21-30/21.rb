@@ -6,30 +6,12 @@
 #
 # Evaluate the sum of all the amicable numbers under 10000.
 
+require_relative '../euler.rb'; include Euler
+
 MAX = 10_000
 
 def d(n) # sum of n's proper divisors
-  divisors(n).inject(:+)
-end
-
-def divisors(n) # n's proper divisors
-  pf = prime_factor(n)
-  (1...pf.size).inject([]) do |f, size|
-    f + pf.combination(size).map{|combo| combo.inject(:*)}
-  end.uniq + [1]
-end
-
-def prime_factor(n)
-  factors = []
-  (2..Math.sqrt(n)).each do |p|
-    break if n == 1
-    while n%p == 0
-      n /= p
-      factors << p
-    end
-  end
-  factors << n unless n == 1
-  factors
+  (factor(n) - [n] + [1]).inject(:+)
 end
 
 pairs = [false] * MAX
