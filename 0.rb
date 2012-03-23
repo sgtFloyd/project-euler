@@ -69,3 +69,18 @@ def factor(num)
     factors + pf.combination(s).map{|c| c.inject(:*)}
   end.uniq
 end
+
+class Fixnum
+  # convert self to a base (between 1 and 9)
+  def base(b)
+    return '' if self == 0
+    return "#{(self/b).base(b)}#{self%b}".to_i
+  end
+end
+
+# determine if string is palindromic
+def pal?(str)
+  return false if str[0] != str[-1]
+  return true if str.length < 2
+  return pal?(str[1..-2])
+end
