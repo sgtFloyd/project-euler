@@ -103,7 +103,7 @@ module Euler
     return palindrome?(str.to_s[1..-2])
   end
 
-  # determine if a list of numbers is 1-9 pandigital
+  # determine if a list of numbers is pandigital based on range
   def pandigital?(list, range)
     list.join.split('').sort.join == [*range].join
   end
