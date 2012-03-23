@@ -10,18 +10,7 @@
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable
 # primes.
 
-$primes = [false, false, true] # initial values
-# memoized, optimized sieve of eratosthenes
-def sieve(n)
-  lower = $primes.length
-  $primes += [true, false] * ((n-lower)/2+1) if n+1 > lower
-  (3..Math.sqrt(n)).each do |i|
-    (3*i..n).step(2*i).each do |j|
-      $primes[j] = false
-    end if $primes[i]
-  end
-  $primes.map.with_index{|t, i| i if t}.compact
-end
+require './euler.rb'; include Euler
 
 def truncatable?(n)
   return false if n < 10

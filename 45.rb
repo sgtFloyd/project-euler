@@ -7,22 +7,7 @@
 #
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-def hexagonal(n)
-  n*(2*n-1)
-end
-
-# x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
-def is_pentagonal(x)
-  solution = solve_quad(3, -1, -2*x)
-  solution.max % 1 == 0
-end
-
-# solve for n: 0 = an^2 + bn + c
-def solve_quad(a, b, c)
-  sqrt = Math.sqrt(b**2 - 4*a*c)
-  return [(-b + sqrt)/(2*a),
-          (-b - sqrt)/(2*a)]
-end
+require './euler.rb'; include Euler
 
 # all hexagonal numbers are also triangular
 n = 144; hn = hexagonal(n)

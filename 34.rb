@@ -4,13 +4,10 @@
 #
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-$factorial = [1]
-def fact(n)
-  $factorial[n] ||= n*fact(n-1)
-end
+require './euler.rb'; include Euler
 
 puts (10..50_000).select{|i|
-  i.to_s.split('').inject(0){|sum, n| sum + fact(n.to_i)} == i
+  i.to_s.split('').inject(0){|sum, n| sum + factorial(n.to_i)} == i
 }.inject(:+)
 
 # => 40730

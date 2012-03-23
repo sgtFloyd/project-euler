@@ -16,16 +16,14 @@
 # can be formed as the concatenated product of an integer with
 # (1,2, ... , n) where n > 1?
 
-def pandigital?(a)
-  a.join.split('').sort.join == '123456789'
-end
+require './euler.rb'; include Euler
 
 max = -1
 (1000..9999).each do |i|
   n = 1; products = [*1..n].map{|m| m*i}
   while products.join.size < 9
     n += 1; products = [*1..n].map{|m| m*i}
-    max = products.join.to_i if pandigital?(products) && max < products.join.to_i
+    max = products.join.to_i if pandigital?(products, 1..9) && max < products.join.to_i
   end
 end
 puts max

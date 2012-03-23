@@ -4,21 +4,8 @@
 #
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-class Fixnum
-  # convert self to a base (between 1 and 9)
-  def base(b)
-    return '' if self == 0
-    return "#{(self/b).base(b)}#{self%b}".to_i
-  end
-end
+require './euler.rb'; include Euler
 
-def pal?(str)
-  str = str.to_s
-  return false if str[0] != str[-1]
-  return true if str.length < 2
-  return pal?(str[1..-2])
-end
-
-puts (1...1_000_000).select{|n| pal?(n) && pal?(n.base(2))}.inject(:+)
+puts (1...1_000_000).select{|n| palindrome?(n) && palindrome?(n.base(2))}.inject(:+)
 
 # => 872187

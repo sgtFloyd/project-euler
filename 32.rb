@@ -11,29 +11,7 @@
 # HINT: Some products can be obtained in more than one way so be sure to
 # only include it once in your sum.
 
-def pandigital?(a, b, c)
-  (a.to_s + b.to_s + c.to_s).split('').sort.join == '123456789'
-end
-
-def prime_factor(num)
-  pf = []
-  (2..Math.sqrt(num).to_i).each do |p|
-    break if num == 1
-    while num%p == 0
-      num /= p
-      pf << p
-    end
-  end
-  pf << num unless num == 1
-  pf
-end
-
-def factor(num)
-  pf = prime_factor(num)
-  (1..pf.length).inject([]) do |factors, s|
-    factors + pf.combination(s).map{|c| c.inject(:*)}
-  end.uniq
-end
+require './euler.rb'; include Euler
 
 puts [1,2,3,4,5,6,7,8,9]
       .permutation(4)
@@ -41,7 +19,7 @@ puts [1,2,3,4,5,6,7,8,9]
         perm.join.to_i
       }.inject([]){|pandigs, prod|
         factor(prod).each {|fact|
-          pandigs << prod if pandigital?(prod, fact, prod/fact)
+          pandigs << prod if pandigital?([prod, fact, prod/fact], 1..9)
         }; pandigs
       }.uniq.inject(:+)
 

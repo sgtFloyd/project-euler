@@ -17,16 +17,14 @@
 # it would take over twenty billion years to check them all. There is an
 # efficient algorithm to solve it. ;o)
 
+require './euler.rb'; include Euler
+
 DATA = File.open('data/67.txt').read
         .gsub("\n", ' ')
         .split(' ')
         .map(&:to_i)
 
 HEIGHT = 99
-
-def triangle(term)
-  term * (term+1) / 2
-end
 
 def cell(x, y) # get cell at row x, position y (0-indexed)
   DATA[triangle(x)+y]
