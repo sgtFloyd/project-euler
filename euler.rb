@@ -13,6 +13,12 @@ module Euler
     $primes.map.with_index{|t, i| i if t}.compact
   end
 
+  $factorials = [1]
+  # memoized, recursive factorial solutions
+  def factorial(n)
+    $factorials[n] ||= n*factorial(n-1)
+  end
+
   # modular exponentiation
   def mod_pow(base, exp, mod)
     res = 1
@@ -32,6 +38,11 @@ module Euler
             (-b - sqrt)/(2*a)]
   end
 
+  # calculate the nth triangle number
+  def triangle(n)
+    n*(n+1)/2
+  end
+
   # determine if x is a triangle number
   def is_triangle(x)
     # x = n(n+1)/2 => 0 = n^2 + n - 2x
@@ -39,11 +50,21 @@ module Euler
     solution.max % 1 == 0
   end
 
+  # calculate the nth pentagonal number
+  def pentagonal(n)
+    n*(3*n-1)/2
+  end
+
   # determine if x is pentagonal
   def is_pentagonal(x)
     # x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
     solution = solve_quad(3, -1, -2*x)
     solution.max % 1 == 0
+  end
+
+  # calculate the nth hexagonal number
+  def hexagonal(n)
+    n*(2*n-1)
   end
 
   # determine if x is hexagonal
@@ -69,17 +90,22 @@ module Euler
 
   # list all factors of num
   def factor(num)
-    pf = prime_factor(num)
+    pf = prime_factors(num)
     (1..pf.length).inject([]) do |factors, s|
       factors + pf.combination(s).map{|c| c.inject(:*)}
     end.uniq
   end
 
   # determine if string is palindromic
-  def pal?(str)
-    return false if str[0] != str[-1]
-    return true if str.length < 2
-    return pal?(str[1..-2])
+  def palindrome?(str)
+    return false if str.to_s[0] != str.to_s[-1]
+    return true if str.to_s.length < 2
+    return palindrome?(str.to_s[1..-2])
+  end
+
+  # determine if a list of numbers is 1-9 pandigital
+  def pandigital?(list, range)
+    list.join.split('').sort.join == [*range].join
   end
 
 end
