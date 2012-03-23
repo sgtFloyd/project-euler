@@ -11,7 +11,7 @@ require './euler.rb'; include Euler
 
 # all hexagonal numbers are also triangular
 n = 144; hn = hexagonal(n)
-(n += 1; hn = hexagonal(n)) while !is_pentagonal(hn)
+(n += 1; hn = hexagonal(n)) while !pentagonal?(hn)
 
 puts hn
 

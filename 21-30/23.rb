@@ -20,7 +20,7 @@ require_relative '../euler.rb'; include Euler
 LIMIT = 20161 # 28123
 
 def d(n) # sum of n's proper divisors
-  (factor(n) - [n] + [1]).inject(:+)
+  (factors(n) - [n] + [1]).inject(:+)
 end
 
 is_abund = []

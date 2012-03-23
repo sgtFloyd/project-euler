@@ -44,7 +44,7 @@ module Euler
   end
 
   # determine if x is a triangle number
-  def is_triangle(x)
+  def triangle?(x)
     # x = n(n+1)/2 => 0 = n^2 + n - 2x
     solution = solve_quad(1, 1, -2*x)
     solution.max % 1 == 0
@@ -56,7 +56,7 @@ module Euler
   end
 
   # determine if x is pentagonal
-  def is_pentagonal(x)
+  def pentagonal?(x)
     # x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
     solution = solve_quad(3, -1, -2*x)
     solution.max % 1 == 0
@@ -68,7 +68,7 @@ module Euler
   end
 
   # determine if x is hexagonal
-  def is_hexagonal(x)
+  def hexagonal?(x)
     # x = n(2n-1) => 0 = 2n^2 - n - x
     solution = solve_quad(2, -1, -x)
     solution.max % 1 == 0
@@ -89,7 +89,7 @@ module Euler
   end
 
   # list all factors of num
-  def factor(num)
+  def factors(num)
     pf = prime_factors(num)
     (1..pf.length).inject([]) do |factors, s|
       factors + pf.combination(s).map{|c| c.inject(:*)}
@@ -98,14 +98,16 @@ module Euler
 
   # determine if string is palindromic
   def palindrome?(str)
-    return false if str.to_s[0] != str.to_s[-1]
-    return true if str.to_s.length < 2
-    return palindrome?(str.to_s[1..-2])
+    str = str.to_s
+    return false if str[0] != str[-1]
+    return true if str.length < 2
+    return palindrome?(str[1..-2])
   end
 
   # determine if a list of numbers is pandigital based on range
-  def pandigital?(list, range)
-    list.join.split('').sort.join == [*range].join
+  def pandigital?(str, range)
+    str = str.join if Array === str
+    str.to_s.split('').sort.join == [*range].join
   end
 
 end

@@ -18,7 +18,7 @@ puts [1,2,3,4,5,6,7,8,9]
       .map{|perm|
         perm.join.to_i
       }.inject([]){|pandigs, prod|
-        factor(prod).each {|fact|
+        factors(prod).each {|fact|
           pandigs << prod if pandigital?([prod, fact, prod/fact], 1..9)
         }; pandigs
       }.uniq.inject(:+)
