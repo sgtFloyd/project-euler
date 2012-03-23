@@ -21,7 +21,7 @@ end
 
 def circular?(arr)
   arr.map.with_index do |_, i|
-    rotation = (arr*2)[i...arr.size+i].join.to_i
+    rotation = (arr*2)[i, arr.size].join.to_i
     return false unless $primes[rotation]
   end
   true
