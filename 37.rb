@@ -25,3 +25,6 @@ end
 puts sieve(1_000_000).select{|prime| truncatable?(prime)}.inject(:+)
 
 # => 748317
+# real    0m1.842s
+# user    0m1.824s
+# sys     0m0.020s

@@ -9,3 +9,6 @@ require './euler.rb'; include Euler
 puts (1...1_000_000).select{|n| palindrome?(n) && palindrome?(n.base(2))}.inject(:+)
 
 # => 872187
+# real    0m0.827s
+# user    0m0.821s
+# sys     0m0.006s

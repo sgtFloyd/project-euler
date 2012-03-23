@@ -29,3 +29,6 @@ end
 puts max
 
 # => 932718654
+# real    0m0.230s
+# user    0m0.225s
+# sys     0m0.004s
