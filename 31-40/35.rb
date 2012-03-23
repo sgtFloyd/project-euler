@@ -6,7 +6,7 @@
 #
 # How many circular primes are there below one million?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 def circular?(arr)
   arr.map.with_index do |_, i|

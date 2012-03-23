@@ -16,7 +16,7 @@
 # can be formed as the concatenated product of an integer with
 # (1,2, ... , n) where n > 1?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 max = -1
 (1000..9999).each do |i|

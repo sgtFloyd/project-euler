@@ -4,7 +4,7 @@
 #
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 puts (10..50_000).select{|i|
   i.to_s.split('').inject(0){|sum, n| sum + factorial(n.to_i)} == i

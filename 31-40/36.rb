@@ -4,7 +4,7 @@
 #
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 puts (1...1_000_000).select{|n| palindrome?(n) && palindrome?(n.base(2))}.inject(:+)
 

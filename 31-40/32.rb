@@ -11,7 +11,7 @@
 # HINT: Some products can be obtained in more than one way so be sure to
 # only include it once in your sum.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 puts [1,2,3,4,5,6,7,8,9]
       .permutation(4)

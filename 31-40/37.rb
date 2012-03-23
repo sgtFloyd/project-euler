@@ -10,7 +10,7 @@
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable
 # primes.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 def truncatable?(n)
   return false if n < 10
