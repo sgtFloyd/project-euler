@@ -123,6 +123,12 @@ module Euler
     false
   end
 
+  # greatest common denominator
+  def gcd(a, b)
+    return b if a==0
+    return gcd(b%a, a)
+  end
+
 end
 
 class Fixnum
