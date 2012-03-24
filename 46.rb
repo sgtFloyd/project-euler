@@ -14,8 +14,11 @@
 require './euler.rb'; include Euler
 
 def composite?(n)
-  sieve(n) if $primes.length >= n
-  !$primes[n]
+  return true if n%2 == 0
+  (3..Math.sqrt(n)).step(2).each do |d|
+    return true if n%d == 0
+  end
+  false
 end
 
 comp = 33

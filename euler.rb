@@ -113,6 +113,16 @@ module Euler
     Math.sqrt(num) % 1 == 0
   end
 
+  # determine if a number is composite
+  def composite?(n)
+    return false if n == 2
+    return true if n<2 || n%2 == 0
+    (3..Math.sqrt(n)).step(2).each do |d|
+      return true if n%d == 0
+    end
+    false
+  end
+
 end
 
 class Fixnum
