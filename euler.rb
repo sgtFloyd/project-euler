@@ -10,7 +10,7 @@ module Euler
         $primes[j] = false
       end if $primes[i]
     end
-    $primes.map.with_index{|t, i| i if t}.compact
+    $primes.map.with_index{|t, i| i if t && i<=n}.compact
   end
 
   $factorials = [1]
@@ -106,6 +106,11 @@ module Euler
   # determine if a list of numbers is pandigital based on range
   def pandigital?(list, range)
     list.join.split('').sort.join == [*range].join
+  end
+
+  # determine if a number is a square
+  def square?(num)
+    Math.sqrt(num) % 1 == 0
   end
 
 end
