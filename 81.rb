@@ -21,7 +21,7 @@ end
 
 $memo = { '79/79' => 7981 }
 def shortest_path(x, y)
-  return if $grid.size == [x,y].max   # stay within grid bounds
+  return if [x,y].include?($grid.size) # stay within grid bounds
   $memo["#{x}/#{y}"] ||=
     $grid[x][y] + [shortest_path(x+1, y), # bottom neighbor
                    shortest_path(x, y+1)  # right neighbor
