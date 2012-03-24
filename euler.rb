@@ -77,7 +77,7 @@ module Euler
   # prime factorization
   def prime_factors(num)
     pf = []
-    (2..Math.sqrt(num).to_i).each do |p|
+    sieve(Math.sqrt(num)).each do |p|
       break if num == 1
       while num%p == 0
         num /= p
@@ -129,10 +129,17 @@ module Euler
     return gcd(b%a, a)
   end
 
+  # euler's totient function
+  # the number of integers i coprime to x for i < x
+  def phi(x)
+    prime_factors(x).uniq
+      .inject(x){|x, k| x - x/k}
+  end
+
 end
 
 class Fixnum
-  # convert an int to a base between 1 and 9
+  # convert to a base between 1 and 9
   def base(b)
     return '' if self == 0
     return "#{(self/b).base(b)}#{self%b}".to_i

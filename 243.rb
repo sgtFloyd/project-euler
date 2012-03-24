@@ -14,10 +14,19 @@ require './euler.rb'; include Euler
 TARGET = 15499.0 / 94744
 
 def resilience(d)
-  (1...d).select{|n| gcd(n,d) == 1}.count / (d-1.0)
+  phi(d) / (d-1.0)
 end
 
-d = 14
-(d += 2; puts d) while resilience(d) >= TARGET
+base = 2; last_prime = 2; mult = 1
+while resilience(base*mult) >= TARGET
+  mult += 1
+  if mult > last_prime && prime_factors(mult) == [mult]
+    last_prime = mult
+    base *= last_prime
+    mult = 1
+  end
+end
 
-puts d
+puts base * mult
+
+# => 892371480
