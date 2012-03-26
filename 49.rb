@@ -19,28 +19,18 @@ end
 
 primes = sieve(10_000).select{|p| p > 1000} # 1,061 4-digit primes
 
-$perms = {}
 primes.each.with_index do |p, i|
-  primes[i+1..-1].each do |q|
-    if permutation?(p, q)
-      $perms[p] ||= []
-      $perms[p] << q
+  primes[i..-1].inject([]) do |perms, q|
+    permutation?(p, q) ? perms << q : perms
+  end.combination(2).inject({}) do |diffs, (p, q)|
+    diffs[q-p] ||= []; diffs[q-p] << [p, q]
+    diffs.each do |diff, combos|
+      if combos.inject(:|).size == 3 && !combos.flatten.include?(1487)
+        puts combos.flatten.uniq.join; exit
+      end
     end
+    diffs
   end
-end
-
-$perms.select{|k,v| v.count > 1} # 464 primes with 2+ permutations
-  .each do |prime, perms|
-
-  diffs = {}
-  perms.unshift(prime).combination(2).each do |p, q|
-    diffs[q-p] ||= []
-    diffs[q-p] << [p, q]
-  end
-
-  winner = diffs.select{|diff, combos| combos.size == 2 && combos.inject(:|).size == 3 }
-  (puts winner.values.flatten.uniq.join; exit) unless (winner.empty? || winner.values.flatten.include?(1487))
-
 end
 
 # => 296962999629
