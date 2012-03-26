@@ -10,7 +10,7 @@ module Euler
         $primes[j] = false
       end if $primes[i]
     end
-    $primes.map.with_index{|t, i| i if t}.compact
+    $primes.map.with_index{|t, i| i if t && i<=n}.compact
   end
 
   $factorials = [1]
@@ -77,7 +77,7 @@ module Euler
   # prime factorization
   def prime_factors(num)
     pf = []
-    (2..Math.sqrt(num).to_i).each do |p|
+    sieve(Math.sqrt(num)).each do |p|
       break if num == 1
       while num%p == 0
         num /= p
@@ -110,10 +110,38 @@ module Euler
     str.to_s.split('').sort.join == [*range].join
   end
 
+  # determine if a number is a square
+  def square?(num)
+    Math.sqrt(num) % 1 == 0
+  end
+
+  # determine if a number is composite
+  def composite?(n)
+    return false if n == 2
+    return true if n<2 || n%2 == 0
+    (3..Math.sqrt(n)).step(2).each do |d|
+      return true if n%d == 0
+    end
+    false
+  end
+
+  # greatest common denominator
+  def gcd(a, b)
+    return b if a==0
+    return gcd(b%a, a)
+  end
+
+  # euler's totient function
+  # the number of integers i coprime to x for i < x
+  def phi(x)
+    prime_factors(x).uniq
+      .inject(x){|x, k| x - x/k}
+  end
+
 end
 
 class Fixnum
-  # convert an int to a base between 1 and 9
+  # convert to a base between 1 and 9
   def base(b)
     return '' if self == 0
     return "#{(self/b).base(b)}#{self%b}".to_i
