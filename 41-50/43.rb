@@ -26,3 +26,6 @@ end
 puts [0,1,2,3,4,5,6,7,8,9].permutation.select{|p| substring_divisible?(p)}.inject(0){|sum, p| sum + p.join.to_i}
 
 # => 16695334890
+# real    0m11.087s
+# user    0m11.066s
+# sys     0m0.027s

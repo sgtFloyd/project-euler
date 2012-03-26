@@ -34,3 +34,6 @@ primes.each.with_index do |p, i|
 end
 
 # => 296962999629
+# real    0m2.130s
+# user    0m2.127s
+# sys     0m0.004s

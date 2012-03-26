@@ -12,13 +12,13 @@
 # containing a 80 by 80 matrix, from the top left to the bottom
 # right by only moving right and down.
 
-require_relative '../euler.rb'; include Euler
+require './euler.rb'; include Euler
 
 $grid = []
-data_file('81.txt') do |input|
-  while (line = input.gets)
-    $grid << eval("[#{line}]")
-  end
+
+input = data_file('81.txt')
+while (line = input.gets)
+  $grid << eval("[#{line}]")
 end
 
 $memo = { '79/79' => 7981 }
@@ -31,3 +31,8 @@ def shortest_path(x, y)
 end
 
 puts shortest_path(0,0)
+
+# => 427337
+# real    0m0.027s
+# user    0m0.024s
+# sys     0m0.003s

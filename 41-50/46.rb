@@ -33,3 +33,6 @@ while true
 end
 
 # => 5777
+# real    0m1.153s
+# user    0m1.149s
+# sys     0m0.004s

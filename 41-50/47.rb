@@ -28,3 +28,6 @@ n += 1 while uniq_factors(n) != [4, 4, 4, 4]
 puts n-3
 
 # => 134043
+# real    0m8.674s
+# user    0m8.669s
+# sys     0m0.012s

@@ -30,3 +30,6 @@ end
 puts base * mult
 
 # => 892371480
+# real    0m0.103s
+# user    0m0.098s
+# sys     0m0.004s
