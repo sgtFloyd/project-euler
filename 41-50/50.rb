@@ -13,7 +13,7 @@
 # Which prime, below one-million, can be written
 # as the sum of the most consecutive primes?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 LIMIT = 1_000_000
 primes = sieve(LIMIT)

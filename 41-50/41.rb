@@ -4,7 +4,7 @@
 #
 # What is the largest n-digit pandigital prime that exists?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 max = -1
 # all 8- and 9-digit pandigitals are divisible by 9

@@ -11,7 +11,7 @@
 #
 # What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 def composite?(n)
   return true if n%2 == 0

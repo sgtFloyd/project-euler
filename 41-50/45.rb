@@ -7,7 +7,7 @@
 #
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 # all hexagonal numbers are also triangular
 n = 144; hn = hexagonal(n)

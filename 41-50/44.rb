@@ -10,7 +10,7 @@
 # sum and difference is pentagonal and D = |Pk - Pj| is minimised;
 # what is the value of D?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 EST = 2_500
 

@@ -11,7 +11,7 @@
 # What 12-digit number do you form by concatenating
 # the three terms in this sequence?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 def permutation?(a, b)
   a.to_s.split('').sort == b.to_s.split('').sort

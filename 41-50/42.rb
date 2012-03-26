@@ -12,7 +12,7 @@
 # Using data/42.txt, a 16K text file containing nearly two-
 # thousand common English words, how many are triangle words?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 def score(word)
   word.split('').inject(0){|sum, char| sum + char.ord - 64}

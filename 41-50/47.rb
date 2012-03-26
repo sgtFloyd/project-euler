@@ -15,7 +15,7 @@
 # have four distinct primes factors. What is
 # the first of these numbers?
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 # memoize the previous 4 results, to avoid recalculation
 n = 647; $last_four = [3, 3, 3, 1] # 644, 645, 646, 647
