@@ -18,7 +18,7 @@ def score(word)
   word.split('').inject(0){|sum, char| sum + char.ord - 64}
 end
 
-puts File.open('data/42.txt').read.gsub('"', '').split(',').select{ |word|
+puts data_file('42.txt').read.gsub('"', '').split(',').select{ |word|
   triangle?(score(word))
 }.count
 

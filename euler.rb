@@ -138,6 +138,10 @@ module Euler
       .inject(x){|x, k| x - x/k}
   end
 
+  def data_file(fname)
+    File.open(File.join(File.expand_path(File.dirname(__FILE__)), "data/#{fname}"))
+  end
+
 end
 
 class Fixnum

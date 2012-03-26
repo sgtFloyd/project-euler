@@ -12,8 +12,10 @@
 # containing a 80 by 80 matrix, from the top left to the bottom
 # right by only moving right and down.
 
+require_relative '../euler.rb'; include Euler
+
 $grid = []
-File.open('data/81.txt') do |input|
+data_file('81.txt') do |input|
   while (line = input.gets)
     $grid << eval("[#{line}]")
   end

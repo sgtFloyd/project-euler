@@ -19,7 +19,7 @@
 
 require './euler.rb'; include Euler
 
-DATA = File.open('data/67.txt').read
+DATA = data_file('67.txt').read
         .gsub("\n", ' ')
         .split(' ')
         .map(&:to_i)

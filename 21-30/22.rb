@@ -9,7 +9,9 @@
 #
 # What is the total of all the name scores in the file?
 
-$names = File.open('data/22.txt').read.gsub('"', '').split(',').sort
+require_relative '../euler.rb'; include Euler
+
+$names = data_file('22.txt').read.gsub('"', '').split(',').sort
 
 def score(name, index)
   name.split('').inject(0){|sum, char| sum + char.ord - 64} * index
