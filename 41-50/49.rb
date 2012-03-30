@@ -13,15 +13,11 @@
 
 require_relative '../euler.rb'; include Euler
 
-def permutation?(a, b)
-  a.to_s.split('').sort == b.to_s.split('').sort
-end
-
 primes = sieve(10_000).select{|p| p > 1000} # 1,061 4-digit primes
 
 primes.each.with_index do |p, i|
   primes[i..-1].inject([]) do |perms, q|
-    permutation?(p, q) ? perms << q : perms
+    anagram?(p, q) ? perms << q : perms
   end.combination(2).inject({}) do |diffs, (p, q)|
     diffs[q-p] ||= []; diffs[q-p] << [p, q]
     diffs.each do |diff, combos|

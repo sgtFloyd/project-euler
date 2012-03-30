@@ -111,6 +111,11 @@ module Euler
     str.to_s.split('').sort.join == [*range].join
   end
 
+  # determine if two string are anagrams of eachother
+  def anagram?(a, b)
+    a.to_s.split('').sort == b.to_s.split('').sort
+  end
+
   # determine if a number is a square
   def square?(num)
     Math.sqrt(num) % 1 == 0
