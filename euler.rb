@@ -1,3 +1,4 @@
+# require_relative '../euler.rb'; include Euler
 module Euler
 
   $primes = [false, false, true] # initial values
