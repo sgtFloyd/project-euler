@@ -22,15 +22,35 @@ data_file('98.txt').read.gsub('"', '').split(',').each do |word|
 end
 
 # find all anagram pairs
-pairs = $words.values.flatten.inject([['NO', 'ON']]) do |pairs, word|
-  next(pairs) if word.length < INDEX
-  word.split('').permutation(INDEX).map{|c| c.join}.uniq.each do |pair|
-    next unless $words.include?(pair)
-    $words[pair].each do |candidate|
+pairs = $words.values.flatten.inject([]) do |pairs, word|
+  word.split('').permutation(INDEX).map{|c| c.join}.uniq.each do |perm|
+    next unless $words.include?(perm)
+    $words[perm].each do |candidate|
       next if word == candidate
       pairs << [word, candidate].sort if anagram?(word, candidate)
     end
   end; pairs
 end.uniq
 
-pairs
+max_sq = 0
+pairs.each do |str_a, str_b|
+  next if str_a.size < max_sq.to_s.size
+  [1,2,3,4,5,6,7,8,9,0].permutation(str_a.size).each do |digits|
+    mapped_a = digits.join.to_i
+    next if digits[0]==0 || !square?(mapped_a)
+    mapping = Hash[str_a.split('').zip(digits)]
+    mapped_b = str_b.split('').map{|c| mapping[c]}.join.to_i
+    
+    if square?(mapped_b) && [mapped_a, mapped_b].max > max_sq &&
+        mapped_a.to_s.size == mapped_b.to_s.size
+      max_sq = [mapped_a, mapped_b].max
+    end
+  end
+end
+
+puts max_sq
+
+# => 18769
+# real    0m25.679s
+# user    0m25.612s
+# sys     0m0.084s
