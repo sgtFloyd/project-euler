@@ -14,6 +14,40 @@ module Euler
     $primes.map.with_index{|t, i| i if t && i<=n}.compact
   end
 
+  # miller-rabin primality test
+  def miller_rabin(n)
+    d = n - 1; s = 0
+    while d % 2 == 0
+     d >>= 1; s += 1
+    end
+    potential_witnesses(n).each do |a|
+      return false unless witness(a, s, d, n)
+    end
+    return true
+  end
+
+  # test primality of n using a single witness
+  def witness(a, s, d, n)
+    a_to_power = mod_pow(a, d, n)
+    return true if a_to_power == 1
+    s.times do
+      return true if a_to_power == n-1
+      a_to_power = (a_to_power * a_to_power) % n
+    end
+    return a_to_power == n-1
+  end
+
+  # allows deterministic miller-rabin results for values of n < 341,550,071,728,321
+  def potential_witnesses(n)
+    return [2, 3]                   if n < 1373653
+    return [31, 73]                 if n < 9080191
+    return [2, 7, 61]               if n < 4759123141
+    return [2, 3, 5, 7, 11]         if n < 2152302898747
+    return [2, 3, 5, 7, 11, 13]     if n < 3474749660383
+    return [2, 3, 5, 7, 11, 13, 17] if n < 341550071728321
+    20.times.map{ rand(1..n-1) }
+  end
+
   $factorials = [1]
   # memoized, recursive factorial solutions
   def factorial(n)
