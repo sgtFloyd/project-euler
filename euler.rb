@@ -223,4 +223,12 @@ class Fixnum
     return '' if self == 0
     return "#{(self/b).base(b)}#{self%b}".to_i
   end
+
+  def choose(r)
+    self.! / (r.! * (self-r).!)
+  end
+
+  def !
+    $factorials[self] ||= self * (self-1).!
+  end
 end
