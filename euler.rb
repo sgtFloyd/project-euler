@@ -184,8 +184,41 @@ module Euler
 
 end
 
+class Object
+  def try(*a, &b)
+    __send__(*a, &b) unless self.nil?
+  end
+  def in?(collection)
+    collection.include?(self)
+  end
+  def blank?
+    respond_to?(:empty?) ? !!empty? : !self
+  end
+  def present?
+    !blank?
+  end
+  def presence
+    self if present?
+  end
+end
+
+class Hash
+  def slice(*keys)
+    keys.each_with_object({}) do |k, hash|
+      hash[k] = self[k] if has_key?(k)
+    end
+  end
+  def except(*keys)
+    dup.except!(*keys)
+  end
+  def except!(*keys)
+    keys.each {|key| delete(key)}
+    self
+  end
+end
+
 class Fixnum
-  # convert to a base between 1 and 9
+  # convert to a base between 2 and 9
   def base(b)
     return '' if self == 0
     return "#{(self/b).base(b)}#{self%b}".to_i
