@@ -217,6 +217,12 @@ class Hash
   end
 end
 
+class Array
+  def frequency
+    each_with_object(Hash.new(0)){|v, h| h[v] += 1 }
+  end
+end
+
 class Fixnum
   # convert to a base between 2 and 9
   def base(b)
