@@ -17,7 +17,7 @@
 # it would take over twenty billion years to check them all. There is an
 # efficient algorithm to solve it. ;o)
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 DATA = data_file('67.txt').read
         .gsub("\n", ' ')

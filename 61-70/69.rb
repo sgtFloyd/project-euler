@@ -18,7 +18,7 @@
 #
 # Find the value of n <= 1,000,000 for which n/phi(n) is a maximum.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 base = 2; multiplier = 1; last_prime = base
 n=base*multiplier; max_n = n, max_phi = n/phi(n)
