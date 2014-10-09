@@ -1,4 +1,5 @@
-require_relative 'memoize.rb'
+require_relative 'math'
+require_relative 'memoize'
 
 class Fixnum
   extend Memoize
@@ -23,6 +24,33 @@ class Fixnum
     return self % mod if exp == 1
     exp.even? ? mod_pow(exp/2, mod)**2 % mod
       : self * mod_pow(exp-1, mod) % mod
+  end
+
+  def gcd(other)
+    return other if self==0
+    (other%self).gcd(self)
+  end
+
+  def square?
+    Math.sqrt(self) % 1 == 0
+  end
+
+  def triangle?
+    # x = n(n+1)/2 => 0 = n^2 + n - 2x
+    solution = Math.solve_quad(1, 1, -2*self)
+    solution.max % 1 == 0
+  end
+
+  def pentagonal?
+    # x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
+    solution = Math.solve_quad(3, -1, -2*self)
+    solution.max % 1 == 0
+  end
+
+  def hexagonal?
+    # x = n(2n-1) => 0 = 2n^2 - n - x
+    solution = solve_quad(2, -1, -self)
+    solution.max % 1 == 0
   end
 
 end
