@@ -53,4 +53,14 @@ class Fixnum
     solutions.max % 1 == 0
   end
 
+  def bouncy?
+    base = self; digits = []
+    while base != 0 do
+      base, digit = base.divmod(10)
+      digits << digit
+    end
+    pairs = digits.reverse.each_cons(2)
+    pairs.any?{|a,b| a<b} && pairs.any?{|a,b| a>b}
+  end
+
 end
