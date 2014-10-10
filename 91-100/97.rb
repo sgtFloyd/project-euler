@@ -6,7 +6,7 @@
 # 2,357,207 digits: 28433×2^7830457+1.
 # Find the last ten digits of this prime number.
 
-require_relative 'core_ext/fixnum'
+require_relative '../core_ext/fixnum'
 puts (28433 * 2.mod_pow(7830457, 10**10) + 1).to_s[-10..-1]
 
 # => 8739992577

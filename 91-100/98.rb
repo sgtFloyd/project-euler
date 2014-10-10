@@ -14,7 +14,7 @@
 #
 # NOTE: All anagrams formed must be contained in the given text file.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 $words = {}; INDEX = 3 # words indexed by first three characters
 data_file('98.txt').read.gsub('"', '').split(',').each do |word|
@@ -40,7 +40,7 @@ pairs.each do |str_a, str_b|
     next if digits[0]==0 || !square?(mapped_a)
     mapping = Hash[str_a.split('').zip(digits)]
     mapped_b = str_b.split('').map{|c| mapping[c]}.join.to_i
-    
+
     if square?(mapped_b) && [mapped_a, mapped_b].max > max_sq &&
         mapped_a.to_s.size == mapped_b.to_s.size
       max_sq = [mapped_a, mapped_b].max

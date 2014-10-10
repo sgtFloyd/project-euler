@@ -11,7 +11,7 @@
 # NOTE: The first two lines in the file represent the numbers in the example
 # given above.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 puts data_file('99.txt').read.split("\n")
           .map{|l| l.split(',').map(&:to_i)}
           .map{|base, exp| exp*Math.log(base)}
