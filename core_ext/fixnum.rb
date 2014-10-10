@@ -37,20 +37,20 @@ class Fixnum
 
   def triangle?
     # x = n(n+1)/2 => 0 = n^2 + n - 2x
-    solution = Math.solve_quad(1, 1, -2*self)
-    solution.max % 1 == 0
+    solutions = Math.solve_quad(1, 1, -2*self)
+    solutions.max % 1 == 0
   end
 
   def pentagonal?
     # x = n(3n-1)/2 => 0 = 3n^2 - n - 2x
-    solution = Math.solve_quad(3, -1, -2*self)
-    solution.max % 1 == 0
+    solutions = Math.solve_quad(3, -1, -2*self)
+    solutions.max % 1 == 0
   end
 
   def hexagonal?
     # x = n(2n-1) => 0 = 2n^2 - n - x
-    solution = solve_quad(2, -1, -self)
-    solution.max % 1 == 0
+    solutions = solve_quad(2, -1, -self)
+    solutions.max % 1 == 0
   end
 
 end
