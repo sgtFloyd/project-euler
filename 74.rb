@@ -26,18 +26,16 @@
 
 require_relative 'core_ext/fixnum'
 
-def chain_length(start)
-  chain = []
-  while !chain.include?(start)
-    chain << start
-    start = start.reverse_digits.map(&:factorial).inject(:+)
-  end
-  chain.length
+$chains = {}
+def chain_length(start, chain=[])
+  return 0 if chain.include?(start)
+  $chains[start] ||= 1 + chain_length(
+    start.digits.map(&:factorial).inject(:+), chain<<start
+  )
 end
-
 puts (1...1_000_000).count{|i| chain_length(i)==60 }
 
 # => 402
-# real    3m11.328s
-# user    3m11.175s
-# sys      0m0.100s
+# real    0m9.312s
+# user    0m9.241s
+# sys     0m0.067s
