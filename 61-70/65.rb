@@ -41,35 +41,28 @@ end
 def nth_expansion(n)
   n==0 ? "2" : "2+ 1/#{nest(n-1)}"
 end
+
 def nest(total, depth=0)
   return tail(depth) if depth == total
   "(#{tail(depth)}+ 1/#{nest(total, depth+1)})"
 end
 
-# evaluate an expression of the form (i + n/d) or
-# (i + 1/n/d) into a single proper fraction
-#   ex: 1 + 1/4   => 5/4
-#       2 + 1/6/3 => 15/6
-def evaluate(str)
-  int, frac = str.gsub(/[\(\)]/, '').split(/\s*\+\s*/)
-  n, d = frac.count('/') == 1 ? frac.split('/')
-                              : frac.split('/')[1,2].reverse
-  "#{n.to_i + int.to_i*d.to_i}/#{d}"
-end
-
-def inner_expression(str)
-  str[str.rindex('(')..str.index(')')] rescue nil
-end
-
-def nth_expansion_reduced(n)
-  continued_fraction = nth_expansion(n)
-  while expression = inner_expression(continued_fraction)
-    continued_fraction.gsub!(expression, evaluate(expression))
+# Evaluate a continued fraction, matching the form "i + n/d" to a single proper
+# fraction. Nested expressions, designated by parentheses, are recursively
+# evaluated from the inside out.
+def collapse(expression)
+  expression.gsub!(/^\(|\)$/,'') if expression.match(/^\(.*\)$/)
+  while expression.index('(')
+    inner_range = expression.rindex('(')..expression.index(')')
+    expression[inner_range] = collapse(expression[inner_range])
   end
-  Math.reduce_fraction evaluate(continued_fraction)
+
+  integer, fraction = expression.split(/\+/)
+  num, denom = Math.simplify_fraction(fraction).split('/').map(&:to_i)
+  Math.reduce_fraction "#{num + integer.to_i * denom}/#{denom}"
 end
 
-puts nth_expansion_reduced(99).split('/')[0]
+puts collapse(nth_expansion(99)).split('/')[0]
       .chars.map(&:to_i).inject(:+)
 
 # => 272

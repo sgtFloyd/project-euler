@@ -7,6 +7,7 @@ module Math
             (-b - sqrt)/(2*a)]
   end
 
+  # Reduce a proper fraction to its lowest terms
   def self.reduce_fraction(fraction)
     numerator, denominator =
       fraction.split('/').map(&:to_i)
@@ -16,6 +17,15 @@ module Math
       denominator /= gcd
     end
     "#{numerator}/#{denominator}"
+  end
+
+  # Simplify a complex fraction to an improper, non-complex fraction
+  def self.simplify_fraction(fraction)
+    nominators = fraction.split('/').map(&:to_i)
+    while nominators.count > 2
+      nominators[-2] = nominators.pop * nominators[-2]
+    end
+    nominators.join('/')
   end
 
   def self.nth_triangle(n)
