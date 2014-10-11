@@ -46,11 +46,14 @@ def a0(root)
 end
 
 # wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
+$expansions = {}
 def nth_expansion(root, depth)
   return [0, 1, a0(root)] if depth == 0
-  m, d, a = nth_expansion(root, depth-1)
-  m = d * a - m; d = (root - m**2) / d
-  a = (a0(root) + m) / d; [m, d, a]
+  $expansions[[root,depth]] ||= begin
+    m, d, a = nth_expansion(root, depth-1)
+    m = d * a - m; d = (root - m**2) / d
+    a = (a0(root) + m) / d; [m, d, a]
+  end
 end
 
 puts (1..10_000).count{|root|
@@ -62,6 +65,6 @@ puts (1..10_000).count{|root|
 }
 
 # => 1322
-# real    0m6.034s
-# user    0m5.995s
-# sys     0m0.037s
+# real    0m1.443s
+# user    0m1.389s
+# sys     0m0.050s
