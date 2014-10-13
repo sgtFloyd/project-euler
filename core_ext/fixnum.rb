@@ -1,8 +1,8 @@
 require_relative 'math'
-require_relative 'memoize'
+require_relative 'memoizer'
 
 class Fixnum
-  extend Memoize
+  extend Memoizer
 
   def base(b)
     raise ArgumentError if b<2 || b>10
