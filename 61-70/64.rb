@@ -41,19 +41,18 @@
 #
 # How many continued fractions for N ≤ 10000 have an odd period?
 
+require_relative '../core_ext/memoize'
+
 def a0(root)
   Math.sqrt(root).floor
 end
 
 # wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
-$expansions = {}
-def nth_expansion(root, depth)
+memo def nth_expansion(root, depth)
   return [0, 1, a0(root)] if depth == 0
-  $expansions[[root,depth]] ||= begin
-    m, d, a = nth_expansion(root, depth-1)
-    m = d * a - m; d = (root - m**2) / d
-    a = (a0(root) + m) / d; [m, d, a]
-  end
+  m, d, a = nth_expansion(root, depth-1)
+  m = d * a - m; d = (root - m**2) / d
+  a = (a0(root) + m) / d; [m, d, a]
 end
 
 puts (1..10_000).count{|root|
