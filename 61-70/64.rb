@@ -41,7 +41,8 @@
 #
 # How many continued fractions for N ≤ 10000 have an odd period?
 
-require_relative '../core_ext/memoize'
+require_relative '../core_ext/memoizer'
+extend Memoizer
 
 def a0(root)
   Math.sqrt(root).floor
