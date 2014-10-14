@@ -16,7 +16,15 @@
 #    => x` = 3x + 2y - 2
 #    => y` = 4x + 3y - 3
 
+TARGET = 10**12
 x = 15; y = 21
-x_prime = 3*x + 2*y - 2
-y_prime = 4*x + 3*y - 3
-puts [x_prime, y_prime].inspect
+while y < TARGET
+  x, y = 3*x + 2*y - 2,
+         4*x + 3*y - 3
+end
+puts x
+
+# => 756872327473
+# real    0m0.104s
+# user    0m0.053s
+# sys     0m0.032s
