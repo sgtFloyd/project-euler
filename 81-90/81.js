@@ -12,7 +12,7 @@
 // containing a 80 by 80 matrix, from the top left to the bottom
 // right by only moving right and down.
 
-require('./euler');
+require('../euler')
 
 var processData = function(data){
   var rows = data.toString().trim().split("\n");

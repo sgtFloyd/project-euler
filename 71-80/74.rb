@@ -24,7 +24,7 @@
 # How many chains, with a starting number below one million, contain exactly
 # sixty non-repeating terms?
 
-require_relative 'core_ext/fixnum'
+require_relative '../core_ext/fixnum'
 
 $chains = {}
 def chain_length(start, chain=[])
