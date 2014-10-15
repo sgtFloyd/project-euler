@@ -12,6 +12,9 @@
 
 TARGET = 2_000_000
 
+# This can be optimized to
+# Math.nth_triangle(width) *
+#   Math.nth_triangle(height)
 def rectangles(width, height)
   (1..width).map do |w|
     (1..height).map do |h|
