@@ -26,11 +26,6 @@ class Fixnum
       : self * mod_pow(exp-1, mod) % mod
   end
 
-  def gcd(other)
-    return other if self==0
-    (other%self).gcd(self)
-  end
-
   def square?
     Math.sqrt(self) % 1 == 0
   end
