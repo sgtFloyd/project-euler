@@ -44,17 +44,19 @@ NUM = [ "73167176531330624919225119674426574742355349194934",
         "71636269561882670428252483600823257530420752963450" ].join('')
 
 max_product = 0
-(0..NUM.length - SUBSTRING_LENGTH).each do |range_start|
-  range_end = range_start + SUBSTRING_LENGTH
-  product = 1
-  (range_start...range_end).each do |index|
-    product = product * NUM.slice(index).to_i
+NUM.split('0').each do |substring|
+  (0..substring.length - SUBSTRING_LENGTH).each do |range_start|
+    range_end = range_start + SUBSTRING_LENGTH
+    product = 1
+    (range_start...range_end).each do |index|
+      product = product * substring.slice(index).to_i
+    end
+    max_product = product if product > max_product
   end
-  max_product = product if product > max_product
 end
 puts max_product
 
 # => 40824
-# real  0m0.040s
-# user  0m0.030s
+# real  0m0.037s
+# user  0m0.028s
 # sys   0m0.007s
