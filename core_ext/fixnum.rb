@@ -59,4 +59,8 @@ class Fixnum
     pairs.any?{|a,b| a<b} && pairs.any?{|a,b| a>b}
   end
 
+  def concat(n)
+    (self.to_s << n.to_s).to_i
+  end
+
 end

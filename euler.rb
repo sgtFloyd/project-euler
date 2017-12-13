@@ -1,17 +1,24 @@
 # require_relative '../euler.rb'; include Euler
 module Euler
 
-  $primes = [false, false, true] # initial values
-  # memoized, optimized sieve of eratosthenes
-  def sieve(n)
-    lower = $primes.length
-    $primes += [true, false] * ((n-lower)/2+1) if n+1 > lower
-    (3..Math.sqrt(n)).each do |i|
-      (3*i..n).step(2*i).each do |j|
-        $primes[j] = false
-      end if $primes[i]
+  # Memoized, optimized Sieve of Eratosthenes.
+  $_primes = [false, false, true] # initial values
+  def sieve(upper_bound, lower_bound=0)
+    if $_primes.length < (upper_bound + 1)
+      # Initialize even indices to false (non-prime), odd indices to true (maybe-prime)
+      $_primes += [true, false] * ((upper_bound - $_primes.length) / 2 + 1)
+
+      (3..Math.sqrt(upper_bound)).each do |i|
+        (3*i..upper_bound).step(2*i).each do |j|
+          $_primes[j] = false
+        end if $_primes[i]
+      end
     end
-    $primes.map.with_index{|t, i| i if t && i<=n}.compact
+
+    range = $_primes[lower_bound..upper_bound]
+    range.map.with_index do |is_prime, index|
+      index + lower_bound if is_prime
+    end.compact
   end
 
   # miller-rabin primality test
@@ -25,6 +32,7 @@ module Euler
     end
     return true
   end
+  alias_method :prime?, :miller_rabin
 
   # test primality of n using a single witness
   def witness(a, s, d, n)
