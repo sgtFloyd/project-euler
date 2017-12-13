@@ -1,23 +1,29 @@
 # require_relative '../euler.rb'; include Euler
 module Euler
 
-  # Memoized, optimized Sieve of Eratosthenes.
-  $_primes = [false, false, true] # initial values
-  def sieve(upper_bound, lower_bound=0)
-    if $_primes.length < (upper_bound + 1)
-      # Initialize even indices to false (non-prime), odd indices to true (maybe-prime)
-      $_primes += [true, false] * ((upper_bound - $_primes.length) / 2 + 1)
+  # Memoized list of primes. `n` is prime if `$_primes[n] == true`
+  $_primes = [false, false, true]
 
-      (3..Math.sqrt(upper_bound)).each do |i|
-        (3*i..upper_bound).step(2*i).each do |j|
-          $_primes[j] = false
-        end if $_primes[i]
+  # memoized, optimized sieve of eratosthenes. returns a list of prime
+  # numbers between `upper_bound` and `lower_bound`, inclusively.
+  def sieve(upper_bound, lower_bound=0)
+    if $_primes.length <= upper_bound
+      # Initialize even indices to false (non-prime), odd indices to true (maybe-prime)
+      $_primes.concat [true, false] * ((upper_bound - $_primes.length) / 2 + 1)
+
+      # Iterate over primes from 3 to √(upper_bound)
+      while (prime_factor ||= 3) <= Math.sqrt(upper_bound)
+        # Mark odd multiples of `prime_factor` as non-prime. Even multiples are already marked.
+        (3*prime_factor..upper_bound).step(2*prime_factor).each{|multiple| $_primes[multiple] = false}
+        # Select the next greatest prime as the next factor.
+        prime_factor = $_primes.index.with_index{|prime, index| prime && index > prime_factor}
       end
     end
 
+    # Collapse booleans into list of prime numbers, by index.
     range = $_primes[lower_bound..upper_bound]
-    range.map.with_index do |is_prime, index|
-      index + lower_bound if is_prime
+    range.map.with_index do |prime, index|
+      index + lower_bound if prime
     end.compact
   end
 
