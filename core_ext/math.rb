@@ -32,11 +32,23 @@ module Math
     n*(n+1)/2
   end
 
+  def self.nth_square(n)
+    n*n
+  end
+
   def self.nth_pentagonal(n)
     n*(3*n-1)/2
   end
 
   def self.nth_hexagonal(n)
     n*(2*n-1)
+  end
+
+  def self.nth_heptagonal(n)
+    n*(5*n-3)/2
+  end
+
+  def self.nth_octagonal(n)
+    n*(3*n-2)
   end
 end
