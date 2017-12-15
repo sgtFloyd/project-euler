@@ -51,7 +51,7 @@ class Fixnum
   def digits
     return [self] if self < 10
     base, digit = self.divmod(10)
-    base.digits.unshift digit
+    base.digits.push digit
   end
 
   def bouncy?

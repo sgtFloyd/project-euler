@@ -28,6 +28,12 @@ module Math
     nominators.join('/')
   end
 
+  # Calculate the nth s-gonal number
+  # @see wikiwand.com/en/Polygonal_number#/Formula
+  def self.nth_polygonal(s, n)
+    (s-2)*n*(n-1)/2+n
+  end
+
   def self.nth_triangle(n)
     n*(n+1)/2
   end
