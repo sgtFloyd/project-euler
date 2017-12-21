@@ -21,16 +21,18 @@
 # each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and
 # octagonal, is represented by a different number in the set.
 
-require_relative '../core_ext/math'
+(b=->c{
+  c[-6]&&c[-1][0][-2,2]==c[0][0][0,2]&&
+    (p c.map{|p,|(p*'').to_i}.inject:+;exit)
+  c[-6]||0.upto(5){|s|
+    n=0;c.rassoc(s)||loop{
+      n+=1;(p="#{-~s*n*~-n/2+n}".chars)[-5]&&break
+      p[3]&&(!c[0]||c[-1][0][-2,2]==p[0,2])&&b[c+[[p,s]]]
+    }
+  }
+})[[]]
 
-# Shifted s-3: [0] are triangle numbers, [5] are octagonal
-@polygonal_numbers = Hash.new{|hash, key| hash[key] = []}
-
-# Calculate all 4-digit polygonal numbers for s = 3..8
-3.upto(8) do |s|
-  1.upto(Float::INFINITY) do |n|
-    break if (psn = Math.nth_polygonal(s, n)) > 9999
-    # split into digits to make comparisons easier
-    @polygonal_numbers[s-3] << psn.digits if psn > 999
-  end
-end
+# => 28684
+# real  0m0.573s
+# user  0m0.514s
+# sys   0m0.019s
