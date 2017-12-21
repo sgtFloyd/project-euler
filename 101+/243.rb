@@ -9,7 +9,7 @@
 #
 # Find the smallest denominator d, having a resilience R(d) < 15499/94744.
 
-require './euler.rb'; include Euler
+require_relative '../euler.rb'; include Euler
 
 TARGET = 15499.0 / 94744
 

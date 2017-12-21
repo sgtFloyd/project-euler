@@ -17,7 +17,7 @@
 # Find the least number for which the proportion of bouncy numbers is exactly
 # 99%.
 
-require_relative 'core_ext/fixnum'
+require_relative '../core_ext/fixnum'
 
 TARGET = 0.99; $bouncy = 0
 (99..Float::INFINITY).each do |i|
